@@ -14,6 +14,7 @@ public abstract class EnemyBase : PoolableObject {
     [SerializeField] AudioClip deathSound;
     AudioSource audioSource;
 
+    // Those are the enemy speeds
     protected const float
         HEX_SPEED = 1.5f,
         PENTA_SPEED = 2f,
