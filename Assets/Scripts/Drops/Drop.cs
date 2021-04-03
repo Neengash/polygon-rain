@@ -11,7 +11,7 @@ public class Drop : PoolableObject
     public const int
         TYPE_BULLET = 0,
         TYPE_HEALTH = 1,
-        TYPE_POWER = 2;
+        TYPE_POWER = 2; // Removed for the time being
 
     SpriteRenderer sRenderer;
 
