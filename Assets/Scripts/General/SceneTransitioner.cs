@@ -7,6 +7,7 @@ public class SceneTransitioner : MonoBehaviour
     public static SceneTransitioner singleton;
 
     Animator anim;
+    bool locked = false;
     const string SCENE_END = "end";
     const float FADE_OUT_TIME = 1f;
 
@@ -27,18 +28,25 @@ public class SceneTransitioner : MonoBehaviour
     }
 
     public void gotoScene(int scene) {
-        anim.SetTrigger(SCENE_END);
-        StartCoroutine(doGotoScene(scene));
+        if (!locked) {
+            locked = true;
+            anim.SetTrigger(SCENE_END);
+            StartCoroutine(doGotoScene(scene));
+        }
     }
 
     IEnumerator doGotoScene(int scene) {
         yield return new WaitForSeconds(FADE_OUT_TIME);
         SceneManager.LoadScene(scene);
+        locked = false;
     }
 
     public void exitGame() {
-        anim.SetTrigger(SCENE_END);
-        StartCoroutine(doExitGame());
+        if (!locked) {
+            locked = true;
+            anim.SetTrigger(SCENE_END);
+            StartCoroutine(doExitGame());
+        }
     }
     IEnumerator doExitGame() {
         yield return new WaitForSeconds(FADE_OUT_TIME);
